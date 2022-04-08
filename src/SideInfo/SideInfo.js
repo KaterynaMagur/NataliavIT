@@ -1,41 +1,26 @@
 import React from 'react';
 import {Box, List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import PhoneIcon from '@mui/icons-material/Phone';
-import EmailIcon from '@mui/icons-material/Email';
 
-const list = [
-  {
-    text: "address",
-    icon: LocationOnIcon,
-  },
-  {
-    text: "phone",
-    icon: PhoneIcon,
-  },
-  {
-    text: "email",
-    icon: EmailIcon,
-  }
-];
 
-const title = "Contacts";
 
-const SideInfo = () => {
+function callbackSos (element) {
+  return <ListItem key={element.text}>
+    <ListItemIcon>
+      {element.icon}
+    </ListItemIcon>
+    <ListItemText primary={element.text} />
+  </ListItem>
+}
+
+
+const SideInfo = (props) => {
   return (
-    <Box sx={{padding: "15px"}}>
-      <Typography variant="h6" align={"center"} color={"white"}>
-        {title}
-      </Typography>
+    <Box sx={{padding: "0 15px"}}>
+      {props.title ? <Typography variant="h6" align={"center"} color={"white"}>
+        {props.title}
+      </Typography> : null}
       <List dense sx={{color: "white"}}>
-        {list.map((listItem) => {
-          return <ListItem>
-            {listItem.icon ? <ListItemIcon>
-              <listItem.icon/>
-            </ListItemIcon> : null}
-            <ListItemText primary={listItem.text}/>
-          </ListItem>
-        })}
+        {props.list?.map(callbackSos)}
       </List>
     </Box>
   );
